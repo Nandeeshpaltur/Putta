@@ -1,208 +1,258 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Putta ❤️</title>
+<title>For you Putta ❤️</title>
 
 <style>
-body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-    font-family: 'Segoe UI', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    text-align: center;
+body{
+    margin:0;
+    overflow:hidden;
+    font-family:'Segoe UI',sans-serif;
+    background:black;
 }
 
-/* Card */
-#main-card {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-    position: relative;
-    z-index: 2;
+/* Instagram Story Layout */
+.story {
+    width:100vw;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3,#fad0c4);
+    color:white;
+    text-align:center;
+    position:relative;
 }
 
-.gif-container img {
-    width: 220px;
-    border-radius: 15px;
+/* Story Progress Bars */
+.top-bars{
+    position:absolute;
+    top:10px;
+    left:10px;
+    right:10px;
+    display:flex;
+    gap:5px;
+}
+.bar{
+    flex:1;
+    height:4px;
+    background:rgba(255,255,255,0.4);
+    border-radius:5px;
+    overflow:hidden;
+}
+.fill{
+    height:100%;
+    width:0%;
+    background:white;
+    transition:width 1s linear;
 }
 
-h1 { color: #d63384; }
-
-.buttons {
-    margin-top: 25px;
-    position: relative;
-    height: 120px;
+/* Blur Effect */
+.blur-bg{
+    position:absolute;
+    inset:0;
+    backdrop-filter:blur(15px);
+    z-index:0;
 }
 
-button {
-    padding: 12px 25px;
-    font-size: 18px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    margin: 10px;
-    transition: 0.3s;
+/* Content */
+.content{
+    z-index:2;
+    padding:20px;
 }
 
-#yesBtn {
-    background: #4CAF50;
-    color: white;
+/* Typing */
+.typing{
+    font-size:26px;
+    min-height:60px;
 }
 
-#yesBtn:hover {
-    transform: scale(1.1);
+/* Buttons */
+button{
+    padding:14px 28px;
+    border:none;
+    border-radius:30px;
+    font-size:18px;
+    margin:10px;
+    cursor:pointer;
+}
+#yesBtn{background:#00c853;color:white;}
+#noBtn{background:#d50000;color:white;position:absolute;}
+
+.hidden{display:none;}
+
+/* Big Heart */
+.big-heart{
+    font-size:120px;
+    animation:beat .5s infinite alternate;
+}
+@keyframes beat{to{transform:scale(1.2);}}
+
+/* Fireworks */
+.firework{
+    position:fixed;
+    width:6px;
+    height:6px;
+    background:white;
+    border-radius:50%;
+    animation:explode 1s ease-out forwards;
+}
+@keyframes explode{
+    0%{opacity:1;}
+    100%{transform:translate(var(--x),var(--y));opacity:0;}
 }
 
-#noBtn {
-    background: #f44336;
-    color: white;
-    position: absolute;
+/* Confetti */
+.confetti{
+    position:fixed;
+    width:8px;
+    height:12px;
+    animation:fall 4s linear forwards;
+}
+@keyframes fall{
+    0%{transform:translateY(-10vh) rotate(0);}
+    100%{transform:translateY(110vh) rotate(720deg);}
 }
 
-/* Result */
-#result {
-    display: none;
-    color: white;
-    z-index: 2;
+/* Balloon */
+.balloon{
+    position:fixed;
+    width:50px;
+    height:70px;
+    border-radius:50%;
+    bottom:50px;
+    animation:float 2s ease forwards;
+}
+@keyframes float{
+    0%{transform:scale(0);}
+    100%{transform:scale(1.2);}
 }
 
-.big-heart {
-    font-size: 120px;
-    animation: beat 0.5s infinite alternate;
-}
-
-@keyframes beat {
-    to { transform: scale(1.2); }
-}
-
-/* Floating hearts */
-.floating-heart {
-    position: fixed;
-    color: #ff4d6d;
-    animation: floatUp 6s linear infinite;
-}
-
-@keyframes floatUp {
-    0% { transform: translateY(100vh); opacity: 1; }
-    100% { transform: translateY(-10vh); opacity: 0; }
-}
-
-/* Balloon group */
-.balloon-group {
-    position: fixed;
-    bottom: -150px;
-    animation: rise 7s linear forwards;
-}
-
-.balloon {
-    width: 50px;
-    height: 70px;
-    border-radius: 50%;
-    position: absolute;
-}
-
-.thread {
-    width: 2px;
-    height: 80px;
-    background: linear-gradient(to bottom, red, blue, yellow, green);
-    position: absolute;
-    top: 70px;
-}
-
-@keyframes rise {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-130vh); }
-}
 </style>
 </head>
-
 <body>
 
-<div id="main-card">
-    <div class="gif-container">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1bmN6amZ0bm9iZzR4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JnB0PW0mZnVsbD0x/K1TQa8ww1ohU2CuL1E/giphy.gif">
-    </div>
-    <h1>Will you be mine forever, Putta? 💖</h1>
+<div class="story">
+<div class="blur-bg"></div>
 
-    <div class="buttons">
-        <button id="yesBtn" onclick="celebrate()">YES 💍</button>
-        <button id="noBtn" onmouseover="moveButton()">NO 😜</button>
-    </div>
+<div class="top-bars">
+  <div class="bar"><div class="fill" id="bar1"></div></div>
+  <div class="bar"><div class="fill" id="bar2"></div></div>
+  <div class="bar"><div class="fill" id="bar3"></div></div>
 </div>
 
-<div id="result">
-    <div class="big-heart">❤️</div>
-    <h1>I LOVE YOU PUTTA!</h1>
-    <h2>You are my forever ✨</h2>
+<div class="content">
+
+<div id="countdown">3</div>
+
+<div id="proposal" class="hidden">
+  <div class="typing" id="typingText"></div>
+  <div style="margin-top:30px;">
+    <button id="yesBtn" onclick="celebrate()">YES ❤️</button>
+    <button id="noBtn" onmouseover="moveNo()">NO 😜</button>
+  </div>
+</div>
+
+<div id="result" class="hidden">
+  <div class="big-heart">❤️</div>
+  <h1 id="finalText"></h1>
+</div>
+
+</div>
 </div>
 
 <script>
 
-/* NO button runs but stays visible */
-function moveButton() {
-    const btn = document.getElementById("noBtn");
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
-    btn.style.left = x + "px";
-    btn.style.top = y + "px";
+/* Dynamic Name */
+const params=new URLSearchParams(window.location.search);
+const name=params.get("name")||"My Love";
+
+/* Countdown */
+let count=3;
+let bars=[bar1,bar2,bar3];
+let interval=setInterval(()=>{
+  bars[3-count].style.width="100%";
+  count--;
+  document.getElementById("countdown").innerText=count;
+  if(count<=0){
+    clearInterval(interval);
+    document.getElementById("countdown").classList.add("hidden");
+    document.getElementById("proposal").classList.remove("hidden");
+    typeText(`Will you be mine forever, ${name}? 💍`);
+  }
+},1000);
+
+/* Typing Effect */
+function typeText(text){
+  let i=0;
+  let el=document.getElementById("typingText");
+  let typing=setInterval(()=>{
+    el.innerHTML+=text.charAt(i);
+    i++;
+    if(i>=text.length) clearInterval(typing);
+  },50);
 }
 
-/* Floating hearts */
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("floating-heart");
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = Math.random() * 20 + 15 + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-}
-setInterval(createHeart, 500);
-
-/* Celebrate */
-function celebrate() {
-    document.getElementById("main-card").style.display = "none";
-    document.getElementById("result").style.display = "block";
-    launchBalloonGroups();
+/* NO button moves */
+function moveNo(){
+  const btn=document.getElementById("noBtn");
+  btn.style.left=Math.random()*(window.innerWidth-100)+"px";
+  btn.style.top=Math.random()*(window.innerHeight-100)+"px";
 }
 
-/* Create balloon groups */
-function launchBalloonGroups() {
-    const colors = ["#ff4d6d", "#ff85a1", "#ffcad4", "#ff99c8", "#cdb4db", "#a2d2ff", "#bde0fe"];
-    
-    for (let g = 0; g < 6; g++) {
-        const group = document.createElement("div");
-        group.classList.add("balloon-group");
-        group.style.left = Math.random() * 90 + "vw";
+/* Celebration */
+function celebrate(){
+  document.getElementById("proposal").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+  document.getElementById("finalText").innerText=`I LOVE YOU ${name}!,,
+  YOU ARE MY EVERYTHING!!!❤️`;
+  fireworks();
+  confetti();
+  balloons();
+}
 
-        for (let i = 0; i < 5; i++) {
-            const balloon = document.createElement("div");
-            balloon.classList.add("balloon");
-            balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            balloon.style.left = (i * 25) + "px";
-            balloon.style.top = (Math.random() * 20) + "px";
+/* Fireworks */
+function fireworks(){
+  for(let i=0;i<100;i++){
+    let f=document.createElement("div");
+    f.className="firework";
+    f.style.left=window.innerWidth/2+"px";
+    f.style.top=window.innerHeight/2+"px";
+    f.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    f.style.setProperty("--x",(Math.random()*400-200)+"px");
+    f.style.setProperty("--y",(Math.random()*400-200)+"px");
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1000);
+  }
+}
 
-            const thread = document.createElement("div");
-            thread.classList.add("thread");
-            thread.style.left = (i * 25 + 24) + "px";
+/* Confetti */
+function confetti(){
+  for(let i=0;i<150;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),4000);
+  }
+}
 
-            group.appendChild(balloon);
-            group.appendChild(thread);
-        }
-
-        document.body.appendChild(group);
-        setTimeout(() => group.remove(), 7000);
-    }
+/* Balloons */
+function balloons(){
+  for(let i=0;i<20;i++){
+    let b=document.createElement("div");
+    b.className="balloon";
+    b.style.left=Math.random()*100+"vw";
+    b.style.background=`hsl(${Math.random()*360},80%,60%)`;
+    document.body.appendChild(b);
+    setTimeout(()=>b.remove(),2000);
+  }
 }
 
 </script>
-
 </body>
 </html>
