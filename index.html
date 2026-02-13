@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Putta ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Card */
+#main-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 2;
+}
+
+.gif-container img {
+    width: 220px;
+    border-radius: 15px;
+}
+
+h1 { color: #d63384; }
+
+.buttons {
+    margin-top: 25px;
+    position: relative;
+    height: 120px;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background: #4CAF50;
+    color: white;
+}
+
+#yesBtn:hover {
+    transform: scale(1.1);
+}
+
+#noBtn {
+    background: #f44336;
+    color: white;
+    position: absolute;
+}
+
+/* Result */
+#result {
+    display: none;
+    color: white;
+    z-index: 2;
+}
+
+.big-heart {
+    font-size: 120px;
+    animation: beat 0.5s infinite alternate;
+}
+
+@keyframes beat {
+    to { transform: scale(1.2); }
+}
+
+/* Floating hearts */
+.floating-heart {
+    position: fixed;
+    color: #ff4d6d;
+    animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Balloon group */
+.balloon-group {
+    position: fixed;
+    bottom: -150px;
+    animation: rise 7s linear forwards;
+}
+
+.balloon {
+    width: 50px;
+    height: 70px;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.thread {
+    width: 2px;
+    height: 80px;
+    background: linear-gradient(to bottom, red, blue, yellow, green);
+    position: absolute;
+    top: 70px;
+}
+
+@keyframes rise {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-130vh); }
+}
+</style>
+</head>
+
+<body>
+
+<div id="main-card">
+    <div class="gif-container">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1bmN6amZ0bm9iZzR4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JnB0PW0mZnVsbD0x/K1TQa8ww1ohU2CuL1E/giphy.gif">
+    </div>
+    <h1>Will you be mine forever, Putta? 💖</h1>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="celebrate()">YES 💍</button>
+        <button id="noBtn" onmouseover="moveButton()">NO 😜</button>
+    </div>
+</div>
+
+<div id="result">
+    <div class="big-heart">❤️</div>
+    <h1>I LOVE YOU PUTTA!</h1>
+    <h2>You are my forever ✨</h2>
+</div>
+
+<script>
+
+/* NO button runs but stays visible */
+function moveButton() {
+    const btn = document.getElementById("noBtn");
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+}
+
+/* Floating hearts */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("floating-heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 15 + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 500);
+
+/* Celebrate */
+function celebrate() {
+    document.getElementById("main-card").style.display = "none";
+    document.getElementById("result").style.display = "block";
+    launchBalloonGroups();
+}
+
+/* Create balloon groups */
+function launchBalloonGroups() {
+    const colors = ["#ff4d6d", "#ff85a1", "#ffcad4", "#ff99c8", "#cdb4db", "#a2d2ff", "#bde0fe"];
+    
+    for (let g = 0; g < 6; g++) {
+        const group = document.createElement("div");
+        group.classList.add("balloon-group");
+        group.style.left = Math.random() * 90 + "vw";
+
+        for (let i = 0; i < 5; i++) {
+            const balloon = document.createElement("div");
+            balloon.classList.add("balloon");
+            balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            balloon.style.left = (i * 25) + "px";
+            balloon.style.top = (Math.random() * 20) + "px";
+
+            const thread = document.createElement("div");
+            thread.classList.add("thread");
+            thread.style.left = (i * 25 + 24) + "px";
+
+            group.appendChild(balloon);
+            group.appendChild(thread);
+        }
+
+        document.body.appendChild(group);
+        setTimeout(() => group.remove(), 7000);
+    }
+}
+
+</script>
+
+</body>
+</html>
